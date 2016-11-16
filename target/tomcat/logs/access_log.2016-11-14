@@ -1,0 +1,9 @@
+127.0.0.1 - - [14/Nov/2016:20:31:20 +0200] "GET / HTTP/1.1" 200 2036 http-bio-8080-exec-1 1879
+127.0.0.1 - - [14/Nov/2016:20:31:20 +0200] "GET /js/jquery-3.1.1.min.js HTTP/1.1" 200 86709 http-bio-8080-exec-2 51
+127.0.0.1 - - [14/Nov/2016:20:31:20 +0200] "GET /js/validate.js HTTP/1.1" 200 3414 http-bio-8080-exec-3 28
+127.0.0.1 - - [14/Nov/2016:20:31:20 +0200] "GET /css/style.css HTTP/1.1" 200 427 http-bio-8080-exec-4 8
+127.0.0.1 - - [14/Nov/2016:20:31:21 +0200] "GET /getAllCards?page=0 HTTP/1.1" 200 59 http-bio-8080-exec-6 480
+127.0.0.1 - - [14/Nov/2016:20:31:22 +0200] "GET /transferMoney HTTP/1.1" 200 121 http-bio-8080-exec-8 126
+127.0.0.1 - - [14/Nov/2016:20:32:00 +0200] "GET /transferMoney HTTP/1.1" 200 121 http-bio-8080-exec-9 5
+127.0.0.1 - - [14/Nov/2016:20:32:01 +0200] "GET /transferMoney HTTP/1.1" 200 121 http-bio-8080-exec-10 3
+127.0.0.1 - - [14/Nov/2016:20:32:02 +0200] "GET /transferMoney HTTP/1.1" 200 121 http-bio-8080-exec-10 8
