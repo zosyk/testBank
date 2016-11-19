@@ -154,7 +154,7 @@ function tableTransactions(json) {
 
     var size = transactions.length;
     if(size == 0){
-        table += "<p>There is no any card. You can create it below:</p>"
+        table += "<p>There is no any transactions</p>"
     }
     for (var i=0;i!=size;++i) {
         if(i == 0){
