@@ -13,4 +13,6 @@ public interface TransactionService {
     List<Transaction> getClientByOffset(final int offset, final int limit);
     void save(final Transaction obj);
     void delete(final long id);
+
+    List<Transaction> findByCardID(long cardID);
 }

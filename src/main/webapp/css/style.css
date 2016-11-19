@@ -6,7 +6,7 @@ label {
 .form {
 	margin-top: 15px;
 	padding: 5px 0 5px 0;
-	/*text-align: center;*/
+	text-align: center;
 }
 
 #form_left{
@@ -21,6 +21,9 @@ label {
 	margin-right: auto;
 	width: 350px;
 	padding: 10px;
+}
+
+#cards_table {
 }
 
 
@@ -45,8 +48,9 @@ table, th, td {
 	margin-top: 5px;
 }
 
-#transfer_money {
+#transfer_money_btn {
 	text-align: right;
+	margin: 20px;
 }
 
 #start_text {
@@ -56,4 +60,8 @@ table, th, td {
 
 #body {
 	background: #777777;
+}
+
+#transactions {
+	margin-top: 20px;
 }

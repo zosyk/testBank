@@ -38,4 +38,8 @@ public class TransactionServiceImpl implements TransactionService{
     public void delete(long id) {
         repository.delete(id);
     }
+
+    public List<Transaction> findByCardID(long cardID) {
+        return repository.findByCardId(cardID);
+    }
 }

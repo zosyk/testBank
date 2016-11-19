@@ -14,8 +14,7 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="<c:url value="/pages/css/bootstrap.css" />" rel="stylesheet">
-	<link href="<c:url value="/pages/css/bootstrap.css" />" rel="stylesheet">
-	<script type="text/javascript" src="../js/validate.js"></script>
+	<script type="text/javascript" src="../js/welcome.js"></script>
 	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
 
 	<!-- Custom styles for this template -->
@@ -34,6 +33,14 @@
 <div class="container" style="width: 300px;">
 	<c:url value="/j_spring_security_check" var="loginUrl" />
 	<form action="${loginUrl}" method="post">
+		<c:if test="${param.error !=null}">
+			<!-- Display error message -->
+			<div class="error">
+				Your login attempt was not successful, try again.<br />
+				<%--Reason: #{sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}--%>
+			</div>
+		</c:if>
+
 		<h2 class="form-signin-heading">Please sign in</h2>
 		<input type="text" class="form-control" name="j_username" placeholder="login" required autofocus value="">
 		<input type="password" class="form-control" name="j_password" placeholder="password" required value="">

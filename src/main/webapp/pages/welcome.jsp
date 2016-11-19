@@ -9,32 +9,18 @@
 <head>
     <title>JSP List Users Records</title>
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/validate.js"></script>
+    <script type="text/javascript" src="../js/welcome.js"></script>
     <link rel="stylesheet" href="../css/style.css">
-    <%--<script type="text/javascript">--%>
-
-
-        <%--function validate(name) {--%>
-            <%--var result  = true;--%>
-            <%--if (name.value == '') {--%>
-                <%--alert("Fill field!!!")--%>
-                <%--result = false;--%>
-            <%--} else {--%>
-            <%--}--%>
-            <%--return result;--%>
-        <%--}--%>
-
-
-    <%--</script>--%>
+    <link href="<c:url value="/pages/css/bootstrap.css" />" rel="stylesheet">
 </head>
 <body id="body">
 
-    <div id="transfer_money">
+    <div id="transfer_money_btn">
         <form action="/transferMoney" method="get">
-            <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn_transf">Transfer Money</button>
+            <button class="btn  btn-primary" type="submit" id="btn_transf">Transfer Money</button>
         </form>
     </div>
-    <div id="users" class="center">
+    <div id="cards_table" class="container">
 
     </div>
 
@@ -56,54 +42,13 @@
             <input type="button" value="Create New Credit Card" onclick="return createCard(document.getElementById('card_number').value,
                                                                              document.getElementById('card_ps').value,
                                                                              document.getElementById('card_type').value,
-                                                                             document.getElementById('users'))">
+                                                                             document.getElementById('cards_table'))">
         </div>
     </div>
 
     <script type="text/javascript">
-        loadUsers(document.getElementById("users"));
+        loadUsers(document.getElementById("cards_table"));
     </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-<%--  <form:form action="createCard" method="post" commandName="bankClient" name="form1" onsubmit="return validate(document.getElementById('name'))">
-        <table border="0">
-            <tr>
-                <td colspan="2" align="center"><h2>Spring MVC Form Demo - Registration</h2></td>
-            </tr>
-            <tr>
-                <td>BankClient Name:</td>
-                <td><form:input path="name" id="name" /></td>
-            </tr>
-            <tr>
-                <td>Address:</td>
-                <td><form:input path="address" /></td>
-            </tr>
-            <tr>
-                <td>Age:</td>
-                <td><form:input path="age" /></td>
-            </tr>
-            &lt;%&ndash;<tr>&ndash;%&gt;
-                &lt;%&ndash;<td>Birthday (mm/dd/yyyy):</td>&ndash;%&gt;
-                &lt;%&ndash;<td><form:input path="birthDate" /></td>&ndash;%&gt;
-            &lt;%&ndash;</tr>&ndash;%&gt;
-            &lt;%&ndash;<tr>&ndash;%&gt;
-                &lt;%&ndash;<td>Profession:</td>&ndash;%&gt;
-                &lt;%&ndash;<td><form:select path="profession" items="${professionList}" /></td>&ndash;%&gt;
-            &lt;%&ndash;</tr>&ndash;%&gt;
-            <tr>
-                <td colspan="2" align="center"><input type="submit" value="Register" /></td>
-            </tr>
-        </table>
-    </form:form>--%>

@@ -145,3 +145,38 @@ function removeOptions(selectbox)
         selectbox.remove(i);
     }
 }
+
+function tableTransactions(json) {
+    json = JSON.parse(json);
+    var transactions = json.transactions;
+    var cards = json.cards;
+    var table = "<table class='table'>";
+
+    var size = transactions.length;
+    if(size == 0){
+        table += "<p>There is no any card. You can create it below:</p>"
+    }
+    for (var i=0;i!=size;++i) {
+        if(i == 0){
+            table += "<tr><th>From Card</th><th>To Card</th><th>Sum</th><th>Date</th></tr>"
+        }
+        var transaction = transactions[i];
+        var date = new Date(transaction.time);
+        var dateToString = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+        var fromCard = findCardByID(cards, transaction.fromID);
+        var toCard = findCardByID(cards, transaction.toID);
+        table += "<tr><td>"+fromCard.cardNumber + " " +fromCard.cardType+"</td><td>"+toCard.cardNumber + " " +toCard.cardType+"</td><td>"+transaction.sum + " $"+"</td><td>" + dateToString + "</td></tr>"
+    }
+    table += "</table>"
+
+    $('#transactions').html(table);
+}
+
+
+function findCardByID(cards, id) {
+
+    for(var i = 0; i<cards.length; i++){
+        var card = cards[i];
+        if (card.id == id) return card;
+    }
+}

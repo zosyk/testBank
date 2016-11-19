@@ -15,7 +15,7 @@
     <!-- Bootstrap core CSS -->
     <link href="<c:url value="/pages/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/pages/css/bootstrap.css" />" rel="stylesheet">
-    <script type="text/javascript" src="../js/validate.js"></script>
+    <script type="text/javascript" src="../js/welcome.js"></script>
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
 
     <!-- Custom styles for this template -->

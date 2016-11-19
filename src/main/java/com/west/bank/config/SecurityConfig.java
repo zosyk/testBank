@@ -92,9 +92,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/test").access("hasRole('USER')");
+                .antMatchers("/").access("hasRole('USER')")
+                .antMatchers("/getAllCards").access("hasRole('USER')")
+                .antMatchers("/getHistory").access("hasRole('USER')")
+                .antMatchers("/createCard").access("hasRole('USER')")
+                .antMatchers("/cards").access("hasRole('USER')")
+                .antMatchers("/transferMoney").access("hasRole('USER')")
+                .antMatchers("/createTransaction").access("hasRole('USER')");
 
-//        http.authorizeRequests().antMatchers("/registration").permitAll();
+        http.authorizeRequests().antMatchers("/registration").permitAll();
 
         http.formLogin()
                 .loginPage("/login")
