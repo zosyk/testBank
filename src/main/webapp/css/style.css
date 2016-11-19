@@ -48,7 +48,7 @@ table, th, td {
 	margin-top: 5px;
 }
 
-#transfer_money_btn {
+.btn_style {
 	text-align: right;
 	margin: 20px;
 }
