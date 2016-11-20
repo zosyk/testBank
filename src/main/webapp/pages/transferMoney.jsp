@@ -11,7 +11,7 @@
     <head>
         <title>Transfer Money</title>
 
-        <link href="<c:url value="/css/style.css" />" rel="stylesheet">
+        <link href="<c:url value="../css/style.css" />" rel="stylesheet">
         <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
         <script src="../js/transfer.js"></script>
     </head>

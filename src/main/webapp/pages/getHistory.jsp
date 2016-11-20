@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>History</title>
-    <link href="<c:url value="/css/style.css" />" rel="stylesheet">
-    <link href="<c:url value="/pages/css/bootstrap.css" />" rel="stylesheet">
+    <link href="<c:url value="../css/style.css" />" rel="stylesheet">
+    <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/transfer.js"></script>
 </head>

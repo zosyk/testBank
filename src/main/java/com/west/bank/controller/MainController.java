@@ -27,7 +27,7 @@ public class MainController {
     public static final String CREDIT_CARDS = "cards";
     public static final String TRANSACTIONS = "transactions";
 
-    private static final int LIMIT = 3;
+    public static final int LIMIT = 3;
     private int offset = 0;
 
 
@@ -47,19 +47,6 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getWelcomePage(final Map<String , Object> model){
         return "welcome";
-    }
-
-    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-    public String saveOrUpdateUser(HttpServletRequest req) {
-        final BankClient bankClient = new BankClient();
-        bankClient.setUsername(req.getParameter("email"));
-        bankClient.setName(req.getParameter("name"));
-        bankClient.setAge(req.getParameter("age"));
-        bankClient.setPassword(req.getParameter("password"));
-
-        bankClientService.save(bankClient);
-        userRoleService.save(new UserRole(req.getParameter("email"), Role.USER.name()));
-        return "login";
     }
 
 
@@ -113,7 +100,6 @@ public class MainController {
         final int size = creditCardService.getAll().size();
         final long id = creditCardService.getAll().get(size-1).getId();
         return new ResponseEntity<CreditCard>(creditCardService.getByID(id), HttpStatus.OK);
-//        return "redirect:/";
     }
 
 
