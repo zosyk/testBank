@@ -59,8 +59,8 @@ function loadUsers() {
         method : 'get',
         success: function (data) {
             callBackLoad(data)},
-        error: function (error) {
-            console.log("in loadusers, error method: " + error);
+        error: function (jqXHR, testStatus, errorThrown) {
+            console.log("in getAllCards method, error: " + errorThrown);
         }
     });
 }

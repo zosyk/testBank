@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,8 +33,16 @@ public class TransferController {
 
 
     @RequestMapping(value = "/transferMoney", method = RequestMethod.GET)
-    public ModelAndView transferMoney(){
-       return getAllCardsModelView("transferMoney");
+    public String transferMoney(final Model model){
+        final ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try{
+            json = mapper.writeValueAsString(creditCardService.getAll());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        model.addAttribute("cards", json);
+        return "transfer";
     }
 
     @RequestMapping(value = "/createTransaction", method = RequestMethod.POST)
@@ -45,27 +54,14 @@ public class TransferController {
         return new ResponseEntity<List<CreditCard>>(creditCardService.getAll(), HttpStatus.OK);
     }
 
-    private ModelAndView getAllCardsModelView(final String url){
-        final ObjectMapper mapper = new ObjectMapper();
-        final ModelAndView model = new ModelAndView(url);
-        String json = "";
-        try{
-            json = mapper.writeValueAsString(creditCardService.getAll());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        model.addObject("cards", json);
-        return model;
-    }
-
     private void calculate(final Transaction transaction){
         final CreditCard fromCreditCard = creditCardService.getByID(transaction.getFromID());
         final CreditCard toCreditCard = creditCardService.getByID(transaction.getToID());
         final  int sum = transaction.getSum();
-        fromCreditCard.setCardValue(fromCreditCard.getCardValue() - sum);
+        fromCreditCard.setValue(fromCreditCard.getValue() - sum);
         creditCardService.save(fromCreditCard);
 
-        toCreditCard.setCardValue(toCreditCard.getCardValue() + sum);
+        toCreditCard.setValue(toCreditCard.getValue() + sum);
         creditCardService.save(toCreditCard);
     }
 }

@@ -16,10 +16,10 @@ public class CreditCard {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
-    private String cardNumber;
-    private String cardPassword;
-    private String cardType;
-    private double cardValue = 20000.5;
+    private String number;
+    private String password;
+    private String type;
+    private double value = 20000.5;
 
     public long getId() {
         return id;
@@ -29,35 +29,35 @@ public class CreditCard {
         this.id = id;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getCardPassword() {
-        return cardPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCardPassword(String cardPassword) {
-        this.cardPassword = cardPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getCardType() {
-        return cardType;
+    public String getType() {
+        return type;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public double getCardValue() {
-        return cardValue;
+    public double getValue() {
+        return value;
     }
 
-    public void setCardValue(double cardValue) {
-        this.cardValue = cardValue;
+    public void setValue(double value) {
+        this.value = value;
     }
 }

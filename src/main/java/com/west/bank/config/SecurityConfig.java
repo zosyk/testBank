@@ -33,16 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-//        http.csrf()
-//                .disable()
-//                .authorizeRequests()
-//                .antMatchers("/").access("hasRole('USER')")
-//                .antMatchers("/getAllCards").access("hasRole('USER')")
-//                .antMatchers("/getHistory").access("hasRole('USER')")
-//                .antMatchers("/createCard").access("hasRole('USER')")
-//                .antMatchers("/cards").access("hasRole('USER')")
-//                .antMatchers("/transferMoney").access("hasRole('USER')")
-//                .antMatchers("/createTransaction").access("hasRole('USER')");
+        http.csrf()
+                .disable()
+                .authorizeRequests()
+                .antMatchers("/").access("hasRole('USER')")
+                .antMatchers("/getAllCards").access("hasRole('USER')")
+                .antMatchers("/getHistory").access("hasRole('USER')")
+                .antMatchers("/createCard").access("hasRole('USER')")
+                .antMatchers("/cards").access("hasRole('USER')")
+                .antMatchers("/transferMoney").access("hasRole('USER')")
+                .antMatchers("/createTransaction").access("hasRole('USER')");
 
         http.authorizeRequests().antMatchers("/registration").permitAll();
 

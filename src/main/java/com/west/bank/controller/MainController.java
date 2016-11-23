@@ -1,31 +1,24 @@
 package com.west.bank.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.west.bank.entity.BankClient;
 import com.west.bank.entity.CreditCard;
 import com.west.bank.entity.Transaction;
-import com.west.bank.entity.UserRole;
 import com.west.bank.service.BankClientService;
 import com.west.bank.service.CreditCardService;
 import com.west.bank.service.UserRoleService;
-import com.west.bank.utils.RequestWrapper;
-import com.west.bank.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
 public class MainController {
 
-    public static final String CREDIT_CARDS = "cards";
-    public static final String TRANSACTIONS = "transactions";
 
     public static final int LIMIT = 3;
     private int offset = 0;
@@ -52,15 +45,18 @@ public class MainController {
 
     @RequestMapping(value = "/getAllCards", params = {"page"},  method = RequestMethod.GET , produces = "application/json")
     @ResponseBody
-    public ResponseEntity<RequestWrapper> getAllClients(@RequestParam(value = "page", required = true, defaultValue = "") String page, final ModelMap modelMap){
-        modelMap.put("paginate", "testText");
-        final RequestWrapper wrapper = new RequestWrapper();
-        offset = Integer.valueOf(page)*LIMIT;
-        wrapper.setCreditCards(getClients(offset, LIMIT));
-        wrapper.setLimit(LIMIT);
-        wrapper.setOffset(offset);
-        wrapper.setSize(creditCardService.getAll().size());
-        return new ResponseEntity<RequestWrapper>(wrapper, HttpStatus.OK);
+    public ResponseEntity<Model> getAllCards(@RequestParam(value = "page", required = true, defaultValue = "") String page, final Model model){
+
+        int offset = Integer.valueOf(page)*LIMIT;
+        List<CreditCard> creditCards = getClients(offset, LIMIT);
+        int limit = LIMIT;
+        int size = creditCardService.getAll().size();
+
+        model.addAttribute(ModelFields.OFFSET, offset);
+        model.addAttribute(ModelFields.CREDIT_CARDS, creditCards);
+        model.addAttribute(ModelFields.LIMIT, limit);
+        model.addAttribute(ModelFields.SIZE, size);
+        return new ResponseEntity<Model>(model, HttpStatus.OK);
     }
 
 
@@ -81,14 +77,14 @@ public class MainController {
             cards.add(creditCardService.getByID(transaction.getToID()));
         }
         final HashMap<Object, Object> map = new HashMap<Object, Object>();
-        map.put(TRANSACTIONS, transactions);
-        map.put(CREDIT_CARDS, cards);
+        map.put(ModelFields.TRANSACTIONS, transactions);
+        map.put(ModelFields.CREDIT_CARDS, cards);
         try{
             json = mapper.writeValueAsString(map);
         } catch (Exception e){
             e.printStackTrace();
         }
-        model.addObject(TRANSACTIONS, json);
+        model.addObject(ModelFields.TRANSACTIONS, json);
         return model;
     }
 
@@ -103,5 +99,15 @@ public class MainController {
     }
 
 
+    public interface ModelFields {
+         String TRANSACTIONS = "transactions";
+
+         String LIMIT = "limit";
+         String SIZE = "size";
+         String OFFSET = "offset";
+         String CREDIT_CARDS = "creditCards";
+
+
+    }
 
 }
