@@ -11,7 +11,7 @@
     <title>JSP List Users Records</title>
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="../js/welcome.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
 </head>
 <body id="body">

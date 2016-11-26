@@ -17,7 +17,7 @@ public class CreditCard {
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
     private String number;
-    private String password;
+    private String pincode;
     private String type;
     private double value = 20000.5;
 
@@ -37,12 +37,12 @@ public class CreditCard {
         this.number = number;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPincode() {
+        return pincode;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
 
     public String getType() {

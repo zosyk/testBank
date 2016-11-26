@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 
-import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -54,13 +53,13 @@ public class MainControllerTest {
         first.setId(1L);
         first.setNumber("3432343234");
         first.setValue(2000.43f);
-        first.setPassword("1234");
+        first.setPincode("1234");
 
         final CreditCard second = new CreditCard();
         first.setId(2L);
         second.setNumber("4444");
         second.setValue(20300.43f);
-        second.setPassword("4343");
+        second.setPincode("4343");
 
         when(creditCardService.getAll()).thenReturn(Arrays.asList(first, second));
 

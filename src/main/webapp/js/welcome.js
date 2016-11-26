@@ -21,14 +21,14 @@ function validate(cardNumber, cardPassword, cardType) {
     return result;
 }
 
-function createCard(cardNumber, cardPassword, cardType) {
+function createCard(number, pincode, type) {
 
-    if (validate(cardNumber, cardPassword, cardType)) {
+    if (validate(number, pincode, type)) {
 
         var card = {
-            "cardNumber": cardNumber,
-            "cardPassword": cardPassword,
-            "cardType": cardType
+            "number": number,
+            "pincode": pincode,
+            "type": type
         }
 
         $.ajax({
@@ -80,7 +80,7 @@ function callBackLoad(data) {
         if(i == 0){
             table += "<tr><th>Card Type</th><th>Card Number</th><th>Card Value</th></tr>"
         }
-        table += "<tr><td>"+data.creditCards[i].cardType+"</td><td>"+data.creditCards[i].cardNumber+"</td><td>"+data.creditCards[i].cardValue+" \$</td><td>" + "<a href=" + "/getHistory?id=" +  data.creditCards[i].id +  " >Watch History</a>" + "</td></tr>"
+        table += "<tr><td>"+data.creditCards[i].type+"</td><td>"+data.creditCards[i].number+"</td><td>"+data.creditCards[i].value+" \$</td><td>" + "<a href=" + "/getHistory?id=" +  data.creditCards[i].id +  " >Watch History</a>" + "</td></tr>"
     }
     table += "</table>"
     drawPagination(data.offset, data.limit, data.size);
