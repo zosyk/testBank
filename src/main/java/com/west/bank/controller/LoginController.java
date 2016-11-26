@@ -32,7 +32,7 @@ public class LoginController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
-        return new ModelAndView("registerUser");
+        return new ModelAndView("registrationView");
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
@@ -40,7 +40,7 @@ public class LoginController {
         final BankClient bankClient = new BankClient();
         bankClient.setUsername(req.getParameter("email"));
         bankClient.setName(req.getParameter("name"));
-        bankClient.setAge(req.getParameter("age"));
+        bankClient.setSurname(req.getParameter("surname"));
         bankClient.setPassword(req.getParameter("password"));
 
         bankClientService.save(bankClient);

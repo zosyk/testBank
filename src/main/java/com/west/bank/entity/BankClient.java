@@ -16,6 +16,7 @@ public class BankClient {
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
     private String name;
+    private String surname;
     private String age;
     @Column(name = "enabled")
     private boolean enabled = true;
@@ -29,6 +30,16 @@ public class BankClient {
     public BankClient(){
 
     }
+
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public String getName() {
         return name;
     }
