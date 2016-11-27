@@ -17,7 +17,6 @@ public class BankClient {
     private long id;
     private String name;
     private String surname;
-    private String age;
     @Column(name = "enabled")
     private boolean enabled = true;
 
@@ -47,15 +46,6 @@ public class BankClient {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
 
     public String getUsername() {
         return this.username;

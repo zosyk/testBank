@@ -24,7 +24,8 @@
         <jstl.version>1.2</jstl.version>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
         <spring.securiry>3.2.0.RELEASE</spring.securiry>
-
+        <spring.social.version>1.1.0.RELEASE</spring.social.version>
+        <spring.social.facebook.version>1.1.0.RELEASE</spring.social.facebook.version>
     </properties>
 
 
@@ -138,6 +139,51 @@
             <artifactId>hamcrest-library</artifactId>
             <version>1.3</version>
         </dependency>
+
+        <!-- Spring Social -->
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-config</artifactId>
+            <version>${spring.social.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-core</artifactId>
+            <version>${spring.social.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-security</artifactId>
+            <version>${spring.social.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-web</artifactId>
+            <version>${spring.social.version}</version>
+        </dependency>
+        <!-- Spring Social Facebook -->
+        <dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-facebook</artifactId>
+            <version>${spring.social.facebook.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-social-core</artifactId>
+                    <groupId>org.springframework.social</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-social-config</artifactId>
+                    <groupId>org.springframework.social</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Spring Social Scribe API -->
+        <dependency>
+            <groupId>org.scribe</groupId>
+            <artifactId>scribe</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
     </dependencies>
 
 

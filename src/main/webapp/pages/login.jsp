@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +64,7 @@
 
 
 
-		<div class="action-container"">
+		<div class="action-container">
 			<div class="action-form">
 
 				<c:url value="/j_spring_security_check" var="loginUrl" />
@@ -81,9 +82,22 @@
 					<input type="password" class="form-control form-item-margin-top" name="j_password" placeholder="password" required value="">
 					<button class="btn  btn-lg btn-primary btn-block form-item-margin-top" type="submit">Sign In</button>
 				</form>
-				<form action="/registration" method="get">
+				<form action="${pageContext.request.contextPath}/registration" method="get">
 					<button class="btn btn-lg btn-primary btn-block form-item-margin-top" type="submit" id="btn_reg">Registration</button>
 				</form>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>Sign in by using social provider</h4>
+						<div class="row social-button-row">
+							<div class="col-lg-4">
+								<a href="${pageContext.request.contextPath}/social/facebook/signin"><button class="btn btn-facebook"><i class="icon-facebook"></i> |Sign in with Facebook</button></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
 			</div>
 
 		</div>
