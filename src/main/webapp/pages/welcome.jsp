@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,14 +18,19 @@
 <body id="body">
 
     <div class="btn_style">
+        Language : <a href="?lang=en">English</a>|
+        <a href="?lang=ru_RU">Chinese</a>
+    </div>
+    <div class="btn_style">
         <form action="/transferMoney" method="get">
-            <button class="btn  btn-primary" type="submit" id="btn_transf">Transfer Money</button>
+            <button class="btn  btn-primary" type="submit" id="btn_transf"><spring:message code="transfer.money" /></button>
         </form>
     </div>
     <div class="btn_style">
         <a class="btn  btn-danger" href="<c:url value="/logout" />" role="button">Log out</a>
 
     </div>
+
 
 
     <div id="cards_table" class="container">

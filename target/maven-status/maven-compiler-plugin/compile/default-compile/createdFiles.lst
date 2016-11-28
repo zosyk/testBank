@@ -1,13 +1,8 @@
-com/west/bank/utils/OAuthServiceProvider.class
-com/west/bank/config/SocialContext.class
 com/west/bank/config/SpringSecurityInitializer.class
 com/west/bank/service/CreditCardService.class
 com/west/bank/controller/LoginController.class
 com/west/bank/repository/BankClientRepository.class
 com/west/bank/service/TransactionService.class
-com/west/bank/utils/OAuthServiceConfig.class
-com/west/bank/utils/FacebookUtil.class
-com/west/bank/controller/FacebookController.class
 com/west/bank/controller/MainController.class
 com/west/bank/entity/CreditCard.class
 com/west/bank/entity/Transaction.class

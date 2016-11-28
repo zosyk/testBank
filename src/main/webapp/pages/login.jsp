@@ -34,10 +34,14 @@
 		<div class="header">
 			<h1>West Bank</h1>
 		</div>
+		<div class="btn_style">
+			Language : <a href="?lang=en"><img  src="../img/ic_en.jpg" width="30" height="20"></a>
+			<a href="?lang=ru"><img  src="../img/ic_ru.png" width="30" height="20"></a>
+		</div>
 		<div class="icons">
 			<div class="feature">
 				<div class="icon    statements"></div>
-				<div class="title">Statements of your cards and accounts</div>
+				<div class="title"><spring:message code="statements.of.card"/></div>
 				<div>Control cash flow on your card / account.</div>
 			</div>
 			<div class="feature">
@@ -85,18 +89,6 @@
 				<form action="${pageContext.request.contextPath}/registration" method="get">
 					<button class="btn btn-lg btn-primary btn-block form-item-margin-top" type="submit" id="btn_reg">Registration</button>
 				</form>
-
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>Sign in by using social provider</h4>
-						<div class="row social-button-row">
-							<div class="col-lg-4">
-								<a href="${pageContext.request.contextPath}/social/facebook/signin"><button class="btn btn-facebook"><i class="icon-facebook"></i> |Sign in with Facebook</button></a>
-							</div>
-						</div>
-
-					</div>
-				</div>
 
 			</div>
 
