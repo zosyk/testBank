@@ -30,6 +30,7 @@ label {
 }
 
 #cards_table {
+	margin-top: 110px;
 }
 
 
@@ -59,12 +60,19 @@ table, th, td {
 	margin: 20px;
 }
 
+.nav {
+	text-align: right;
+	margin: 20px;
+}
+
 #start_text {
 	margin-top: 10%;
 	margin-left: 10%;
 }
 
-#body {
+body {
+	margin: 0px;
+	padding: 0px;
 	background: url("../img/bg.png");
 }
 
@@ -133,4 +141,21 @@ table, th, td {
 .form-item-margin-top{
 	margin-top: 5px;
 }
+
+/*navigation*/
+.navigation-bar {
+	padding: 14px;
+	border-radius: 0px;
+	border: none;
+	width: 100%;
+	height: 50px;
+	background-color: #c8e6c9;
+	text-align: right;
+}
+
+.navbar-item{
+	padding: inherit;
+
+}
+
 

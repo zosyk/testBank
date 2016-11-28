@@ -9,29 +9,20 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>JSP List Users Records</title>
+    <title>Welcome to West bank!</title>
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="../js/welcome.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
 </head>
-<body id="body">
+<body>
 
-    <div class="btn_style">
-        Language : <a href="?lang=en">English</a>|
-        <a href="?lang=ru_RU">Chinese</a>
+    <div class="navigation-bar">
+        <a class="navbar-item" href="/transferMoney"><spring:message code="transfer.money" /></a>
+        <a class="navbar-item" href="<c:url value="/logout" />">Log out</a>
+        <a href="?lang=en"><img  src="../img/ic_en.jpg" width="30" height="20"></a>
+        <a href="?lang=ru"><img  src="../img/ic_ru.png" width="30" height="20"></a>
     </div>
-    <div class="btn_style">
-        <form action="/transferMoney" method="get">
-            <button class="btn  btn-primary" type="submit" id="btn_transf"><spring:message code="transfer.money" /></button>
-        </form>
-    </div>
-    <div class="btn_style">
-        <a class="btn  btn-danger" href="<c:url value="/logout" />" role="button">Log out</a>
-
-    </div>
-
-
 
     <div id="cards_table" class="container">
 
@@ -52,7 +43,7 @@
                 <option>Credit Card</option>
                 <option>Withdraw Card</option>
             </select>
-            <input type="button" value="Create New Credit Card" onclick="return createCard(document.getElementById('card_number').value,
+            <input type="button" class="btn btn-success" value="Create New Credit Card" onclick="return createCard(document.getElementById('card_number').value,
                                                                              document.getElementById('card_ps').value,
                                                                              document.getElementById('card_type').value,
                                                                              document.getElementById('cards_table'))">

@@ -69,7 +69,7 @@ function callBackLoad(data) {
     console.log("success : getAll");
 
     // var usersBlock = document.getElementById("users");
-    var table = "<table class='table'>";
+    var table = "<table class=' table table-striped'>";
 
     console.log("offset: " + data.offset + " , limit: " + data.limit + " , size: " + data.size);
     var size = data.creditCards.length;
