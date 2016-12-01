@@ -22,6 +22,15 @@ public class Transaction {
     private int sum;
     private long time;
 
+    private String whomSend;
+
+    public String getWhomSend() {
+        return whomSend;
+    }
+
+    public void setWhomSend(String whomSend) {
+        this.whomSend = whomSend;
+    }
 
     public long getId() {
         return id;

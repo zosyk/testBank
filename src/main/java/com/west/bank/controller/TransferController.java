@@ -6,18 +6,14 @@ import com.west.bank.entity.Transaction;
 import com.west.bank.service.CreditCardService;
 import com.west.bank.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class TransferController {
@@ -27,13 +23,14 @@ public class TransferController {
     @Autowired
     CreditCardService creditCardService;
 
+
     @Autowired
     TransactionService transactionService;
 
 
 
-    @RequestMapping(value = "/transferMoney", method = RequestMethod.GET)
-    public String transferMoney(final Model model){
+    @RequestMapping(value = "/transferMoneyBetween", method = RequestMethod.GET)
+    public String transferMoneyBetween(final Model model){
         final ObjectMapper mapper = new ObjectMapper();
         String json = "";
         try{
@@ -42,16 +39,67 @@ public class TransferController {
             e.printStackTrace();
         }
         model.addAttribute("cards", json);
-        return "transfer";
+        return "transferBetween";
     }
 
-    @RequestMapping(value = "/createTransaction", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<List<CreditCard>> createTransaction(@RequestBody Transaction transaction) {
+    @RequestMapping(value = "/transferMoneyToSomeone", method = RequestMethod.GET)
+    public String transferMoneyToSomeone(final Model model){
+        final ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try{
+            json = mapper.writeValueAsString(creditCardService.getAll());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        model.addAttribute("cards", json);
+        return "transferToSomeOne";
+    }
+
+    @RequestMapping(value = "/confirmTransaction", method = RequestMethod.POST)
+    public String confirmTransaction(HttpServletRequest request, final Model model) {
+
+        final Long fromID = Long.valueOf(request.getParameter("fromID"));
+        final Long toID = Long.valueOf(request.getParameter("toID"));
+        final Integer sum = Integer.valueOf(request.getParameter("sum"));
+
+        final Transaction transaction = new Transaction();
+
+        transaction.setFromID(fromID);
+        transaction.setToID(toID);
+        transaction.setSum(sum);
         transaction.setTime(new Date().getTime());
         transactionService.save(transaction);
         calculate(transaction);
-        return new ResponseEntity<List<CreditCard>>(creditCardService.getAll(), HttpStatus.OK);
+
+        final ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try{
+            json = mapper.writeValueAsString(creditCardService.getAll());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        model.addAttribute("cards", json);
+        return "transferBetween";
+    }
+
+    @RequestMapping(value = "/createTransactionBetween", method = RequestMethod.POST)
+    public ModelAndView createTransactionBetween(HttpServletRequest request){
+
+        final Long fromID = Long.valueOf(request.getParameter("fromID"));
+        final Long toID = Long.valueOf(request.getParameter("toID"));
+
+        final Integer sum = Integer.valueOf(request.getParameter("sum"));
+
+        final ModelAndView modelAndView = new ModelAndView("transactionView");
+
+        final CreditCard fromCreditCard = creditCardService.getByID(fromID);
+        final CreditCard toCreditCard = creditCardService.getByID(toID);
+
+        modelAndView.addObject("fromCard", fromCreditCard);
+        modelAndView.addObject("toCard", toCreditCard);
+        modelAndView.addObject("sum", sum);
+
+        return modelAndView;
     }
 
     private void calculate(final Transaction transaction){

@@ -36,4 +36,8 @@ public class BankClientServiceImpl implements BankClientService{
     public void delete(long id) {
         repository.delete(id);
     }
+
+    public BankClient getClientByUsername(String username) {
+        return repository.findBankClientByUsername(username);
+    }
 }

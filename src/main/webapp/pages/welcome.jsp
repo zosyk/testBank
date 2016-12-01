@@ -18,7 +18,8 @@
 <body>
 
     <div class="navigation-bar">
-        <a class="navbar-item" href="/transferMoney"><spring:message code="transfer.money" /></a>
+        <a class="navbar-item" href="/transferMoneyBetween"><spring:message code="transfer.money.between.your.cards" /></a>
+        <a class="navbar-item" href="/transferMoneyToSomeone"><spring:message code="transfer.money.to.someone" /></a>
         <a class="navbar-item" href="<c:url value="/logout" />">Log out</a>
         <a href="?lang=en"><img  src="../img/ic_en.jpg" width="30" height="20"></a>
         <a href="?lang=ru"><img  src="../img/ic_ru.png" width="30" height="20"></a>

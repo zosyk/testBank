@@ -1,6 +1,7 @@
 package com.west.bank.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.west.bank.entity.BankClient;
 import com.west.bank.entity.CreditCard;
 import com.west.bank.entity.Transaction;
 import com.west.bank.service.BankClientService;
@@ -9,6 +10,8 @@ import com.west.bank.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +95,16 @@ public class MainController {
     @RequestMapping(value = "/createCard", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<CreditCard> saveOrUpdateUser(@RequestBody CreditCard creditCard) {
+
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        final BankClient curClient = bankClientService.getClientByUsername(auth.getName());
+
+        creditCard.setOwnerID(curClient.getId());
+        creditCard.setOwnerName(curClient.getName() + " " + curClient.getSurname());
+
         creditCardService.save(creditCard);
+
         final int size = creditCardService.getAll().size();
         final long id = creditCardService.getAll().get(size-1).getId();
         return new ResponseEntity<CreditCard>(creditCardService.getByID(id), HttpStatus.OK);

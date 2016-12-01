@@ -159,3 +159,80 @@ body {
 }
 
 
+/*transactionView*/
+
+.main-container {
+	margin-top: 50px;
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+.main-container hr {
+
+	border-color: #44a89f;
+}
+
+.steps {
+	font-weight: bold;
+}
+
+.cards-descr-container {
+
+	margin: auto;
+	width: 400px;
+
+}
+.cards-labels {
+	margin-left: 70px;
+	float: left;
+
+}
+.cards-labels p {
+
+	color: #4fc3b8;
+	text-align: right;
+
+}
+
+.cards-values {
+	float: right;
+	margin-right: 120px;
+}
+
+.confirm-from-container {
+	float: left;
+}
+
+.confirm-from-container p {
+	margin-left: 250px;
+	font-size: 33px;
+}
+
+.confirm-to-container {
+	float: left;
+}
+
+.confirm-to-container p {
+	font-size: 33px;
+}
+
+.confirm-container {
+	clear: both;
+	padding-top: 30px;
+}
+
+.transfer-btn {
+	padding-top: 40px;
+	clear: both;
+	text-align: center;
+}
+
+.arrow-icon {
+	margin-top: 30px;
+	margin-left: 100px;
+	margin-right: 100px;
+	float: left;
+	width: 36px;
+	height: 36px;
+	background: transparent url(../img/arraw.png) 0 -1941px;
+}

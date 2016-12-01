@@ -21,6 +21,25 @@ public class CreditCard {
     private String type;
     private double value = 20000.5;
 
+    private long ownerID;
+    private String ownerName;
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public long getOwnerID() {
+        return ownerID;
+    }
+
+    public void setOwnerID(long ownerID) {
+        this.ownerID = ownerID;
+    }
+
     public long getId() {
         return id;
     }

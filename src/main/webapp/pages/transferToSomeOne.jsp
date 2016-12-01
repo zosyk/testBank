@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: alex
@@ -17,24 +18,23 @@
     </head>
     <body id="body">
 
-        <h1 id="start_text">Transfer money between your accounts</h1>
+        <h1 id="start_text"><spring:message code="transfer.money.to.someone" /></h1>
         <hr width="80%"/>
 
         <div class="form">
             <div id="form_left">
 
-                <label for="from_card">From card/wallet:</label>
+                <label for="from_card">From card:</label>
                <select id="from_card">
                 </select><br>
 
-                <label for="to_card">To card/wallet:</label>
-                <select id="to_card">
-                </select><br>
+                <label for="to_card">Whom:</label>
+                <input type="text"  id="to_card" required  placeholder="card number"/>
 
                 <label for="sum">Sum:</label>
                 <input type="text"  id="sum" required  placeholder="sum"/> $<br>
                 <label for="btn_submit"></label>
-                <input type="button" id="btn_submit" value="Submit" onclick="createTransaction(document.getElementById('sum'))">
+                <input type="button" id="btn_submit" value="Submit" >
             </div>
         </div>
 

@@ -18,7 +18,7 @@ function createSelectFromCards(cardsSelector, data) {
         var card = cards[i];
         var option = document.createElement("option");
         option.setAttribute("value", card.cardNumber);
-        option.text = card.cardNumber + " " +card.cardType +   "  sum: " + card.cardValue + " $";
+        option.text = card.number + " " +card.type +   "  sum: " + card.value + " $";
         cardsSelector.appendChild(option);
     }
 
@@ -33,7 +33,7 @@ function createSelectFromCardsAjax(cardsSelector, cards) {
         var card = cards[i];
         var option = document.createElement("option");
         option.setAttribute("value", card.cardNumber);
-        option.text = card.cardNumber + " " +card.cardType +   "  sum: " + card.cardValue + " $";
+        option.text = card.number + " " +card.type +   "  sum: " + card.value + " $";
         cardsSelector.appendChild(option);
     }
 
@@ -59,7 +59,7 @@ function createSelectToCards(cardsSelector, data) {
         var card = cards[i];
         var option = document.createElement("option");
         option.setAttribute("value", card.cardNumber);
-        option.text = card.cardNumber + " " +card.cardType +   "  sum: " + card.cardValue + " $";
+        option.text = card.number + " " +card.type +   "  sum: " + card.value + " $";
         cardsSelector.appendChild(option);
     }
 
@@ -75,7 +75,7 @@ function createSelectToCardsAjax(cardsSelector, cards) {
         var card = cards[i];
         var option = document.createElement("option");
         option.setAttribute("value", card.cardNumber);
-        option.text = card.cardNumber + " " +card.cardType +   "  sum: " + card.cardValue + " $";
+        option.text = card.number + " " +card.type +   "  sum: " + card.value + " $";
         cardsSelector.appendChild(option);
     }
 
@@ -90,35 +90,27 @@ function selectorToCardsListener(selector) {
     }
 }
 
-function createTransaction(sum) {
-    sumInput = sum;
+function createTransaction(transactionForm) {
+
+    var fromInput = transactionForm.elements["fromID"];
+    var toInput = transactionForm.elements["toID"];
 
   if(validateTransaction()){
       var card = {
           "fromID": cards[fromCard].id,
-          "toID": cards[toCard].id,
-          "sum": sum.value
+          "toID": cards[toCard].id
       }
 
-      $.ajax({
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          },
-          method : 'post',
-          url: '/createTransaction',
-          data: JSON.stringify(card),
-          success: function (data) {
-              initSelectors(data);
-              alert("Transaction completed")
-          },
-          error: function (jqXHR, testStatus, errorThrown) {
-              console.log("in error method, error: " + errorThrown);
-          }
-      });
+      fromInput.value = card.fromID;
+      toInput.value = card.toID;
+
+      transactionForm.submit();
+
+
   } else {
       alert("Please choose credit card, which you want to fill")
   }
+
 }
 
 function validateTransaction() {

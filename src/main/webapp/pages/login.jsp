@@ -71,8 +71,8 @@
 		<div class="action-container">
 			<div class="action-form">
 
-				<c:url value="/j_spring_security_check" var="loginUrl" />
-				<form action="${loginUrl}" method="post">
+				<c:url value="/j_spring_security_check" var="createTransaction" />
+				<form action="${createTransaction}" method="post">
 					<c:if test="${param.error !=null}">
 						<!-- Display error message -->
 						<div class="error">
