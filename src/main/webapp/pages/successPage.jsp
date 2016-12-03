@@ -2,27 +2,26 @@
 <%--
   Created by IntelliJ IDEA.
   User: alex
-  Date: 11/6/16
-  Time: 4:15 PM
+  Date: 12/2/16
+  Time: 9:16 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>History</title>
+    <title>Success transaction</title>
     <link href="<c:url value="../css/style.css" />" rel="stylesheet">
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/transferBetweenMyCards.js"></script>
 </head>
-    <body id="body">
+<body>
+        <h1 class="successfull-text">successful operation</h1>
 
-        <div id="transactions" class="container">
+        <div class="return-btn">
+            <form action="${pageContext.request.contextPath}/success" method="get">
+
+                <button type="submit" class="btn btn-lg btn-success">Return to the cabinet</button>
+
+            </form>
         </div>
-
-    <script>
-        tableTransactions('${transactions}')
-    </script>
-
-    </body>
+</body>
 </html>

@@ -51,17 +51,17 @@ public class MainControllerTest {
     public void testGetAllCards() throws Exception {
         final CreditCard first = new CreditCard();
         first.setId(1L);
-        first.setNumber("3432343234");
+        first.setNumber(1234567891234569L);
         first.setValue(2000.43f);
         first.setPincode("1234");
 
         final CreditCard second = new CreditCard();
         first.setId(2L);
-        second.setNumber("4444");
+        second.setNumber(1234567895234569L);
         second.setValue(20300.43f);
         second.setPincode("4343");
 
-        when(creditCardService.getAll()).thenReturn(Arrays.asList(first, second));
+        when(creditCardService.getCreditCardByOffset(0,5,1)).thenReturn(Arrays.asList(first, second));
 
         mockMvc.perform(get("/getAllCards?page=" + page))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));

@@ -13,4 +13,5 @@ public interface BankClientRepository extends JpaRepository<BankClient, Long> {
 
     @Query("select b from BankClient b where b.username = :username")
     BankClient findBankClientByUsername(@Param("username") String username);
+
 }

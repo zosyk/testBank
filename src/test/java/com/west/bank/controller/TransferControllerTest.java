@@ -31,7 +31,7 @@ public class TransferControllerTest {
 
 
     @InjectMocks
-    private TransferController transferController;
+    private TransferBetweenMyCardsController transferController;
 
     private MockMvc mockMvc;
 
@@ -55,15 +55,15 @@ public class TransferControllerTest {
     public void testTransferMoney() throws Exception {
         final CreditCard first = new CreditCard();
         first.setId(1L);
-        first.setNumber("3432343234");
+        first.setNumber(1234567891234567L);
         first.setPincode("1234");
 
         final CreditCard second = new CreditCard();
         second.setId(2L);
-        second.setNumber("4444");
+        second.setNumber(1234567891234569L);
         second.setPincode("4343");
 
-        when(creditCardService.getAll()).thenReturn(Arrays.asList(first, second));
+        when(creditCardService.getCreditCardByOffset(0,5,1)).thenReturn(Arrays.asList(first, second));
 
         mockMvc.perform(get("/transferMoney"))
                 .andExpect(status().isOk())
@@ -72,14 +72,14 @@ public class TransferControllerTest {
                 .andExpect(model().attribute("cards", hasItem(
                         allOf(
                                 hasProperty("id", is(1L)),
-                                hasProperty("number", is("3432343234")),
+                                hasProperty("number", is(1234567891234567L)),
                                 hasProperty("password", is("1234"))
                         )
                 )))
                 .andExpect(model().attribute("cards", hasItem(
                         allOf(
                                 hasProperty("id", is(2L)),
-                                hasProperty("number", is("4444")),
+                                hasProperty("number", is(1234567891234569L)),
                                 hasProperty("password", is("4343"))
                         )
                 )))

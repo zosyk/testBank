@@ -55,8 +55,11 @@
         </div>
 
 
+
+        <c:set var="confirmTransaction" value="${isBetween ? '/confirmTransactionBetween' : '/confirmTransactionToSomeone'}"/>
+
         <div class="transfer-btn">
-            <form action="${pageContext.request.contextPath}/confirmTransaction" method="post">
+            <form action="${confirmTransaction}" method="post">
 
                 <input type="hidden"  name="sum" value="${sum}"/>
                 <input type="hidden"   name="fromID" value="${fromCard.id}"/>

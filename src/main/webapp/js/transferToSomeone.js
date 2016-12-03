@@ -90,35 +90,21 @@ function selectorToCardsListener(selector) {
     }
 }
 
-function createTransaction(transactionForm) {
+
+function createTransactionToSomeOne(transactionForm) {
 
     var fromInput = transactionForm.elements["fromID"];
-    var toInput = transactionForm.elements["toID"];
 
-  if(validateTransaction()){
-      var card = {
-          "fromID": cards[fromCard].id,
-          "toID": cards[toCard].id
-      }
+    var card = {
+        "fromID": cards[fromCard].id
+    }
 
-      fromInput.value = card.fromID;
-      toInput.value = card.toID;
+    fromInput.value = card.fromID;
 
-      transactionForm.submit();
-
-
-  } else {
-      alert("Please choose credit card, which you want to fill")
-  }
-
+    transactionForm.submit();
 }
 
-function validateTransaction() {
-    var result = true;
-    if(fromCard == toCard)
-        result = false;
-    return result;
-}
+
 
 function initSelectors(data) {
     var model = '${cards}';

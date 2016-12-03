@@ -16,24 +16,29 @@ public class CreditCardServiceImpl implements CreditCardService{
     CreditCardRepository repository;
 
 
-    public List<CreditCard> getAll() {
-        return repository.findAll();
+    public List<CreditCard> findAllByUserID(long userID) {
+        return repository.findAllByUserID(userID);
     }
 
     public CreditCard getByID(long id) {
         return repository.findOne(id);
     }
 
-    public List<CreditCard> getClientByOffset(final int offset, final int limit) {
+    public List<CreditCard> getCreditCardByOffset(final int offset, final int limit, final long userID) {
 
-        return repository.findAll(new CustomPageable(offset, limit)).getContent();
+        return repository.findAllByUserIDWithOffset(userID, new CustomPageable(offset, limit)).getContent();
     }
 
-    public void save(CreditCard remind) {
-        repository.saveAndFlush(remind);
+    public void save(CreditCard creditCard) {
+        repository.saveAndFlush(creditCard);
     }
 
     public void delete(long id) {
         repository.delete(id);
+    }
+
+    public CreditCard findCardByNumber(long number) {
+
+        return repository.findCardByNumber(number);
     }
 }

@@ -19,42 +19,34 @@ public class CustomPageable implements Pageable {
         this.limit = limit;
     }
 
-    @Override
     public int getPageNumber() {
         return 0;
     }
 
-    @Override
     public int getPageSize() {
         return limit;
     }
 
-    @Override
     public int getOffset() {
         return offset;
     }
 
-    @Override
     public Sort getSort() {
         return null;
     }
 
-    @Override
     public Pageable next() {
         return null;
     }
 
-    @Override
     public Pageable previousOrFirst() {
         return this;
     }
 
-    @Override
     public Pageable first() {
         return this;
     }
 
-    @Override
     public boolean hasPrevious() {
         return false;
     }

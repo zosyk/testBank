@@ -7,11 +7,10 @@ import com.west.bank.entity.Transaction;
 import com.west.bank.service.BankClientService;
 import com.west.bank.service.CreditCardService;
 import com.west.bank.service.UserRoleService;
+import com.west.bank.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,9 +39,10 @@ public class MainController {
     com.west.bank.service.TransactionService transactionService;
 
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getWelcomePage(final Map<String , Object> model){
-        return "welcome";
+        return "index";
     }
 
 
@@ -53,7 +53,7 @@ public class MainController {
         int offset = Integer.valueOf(page)*LIMIT;
         List<CreditCard> creditCards = getClients(offset, LIMIT);
         int limit = LIMIT;
-        int size = creditCardService.getAll().size();
+        int size = creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()).size();
 
         model.addAttribute(ModelFields.OFFSET, offset);
         model.addAttribute(ModelFields.CREDIT_CARDS, creditCards);
@@ -64,7 +64,7 @@ public class MainController {
 
 
     private List<CreditCard> getClients(final int offset, final int limit){
-        return creditCardService.getClientByOffset(offset, limit);
+        return creditCardService.getCreditCardByOffset(offset, limit, bankClientService.getClientByUsername(Utils.getAuth().getName()).getId());
     }
 
     @RequestMapping(value = "/getHistory", params = {"id"}, method = RequestMethod.GET)
@@ -94,19 +94,18 @@ public class MainController {
 
     @RequestMapping(value = "/createCard", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<CreditCard> saveOrUpdateUser(@RequestBody CreditCard creditCard) {
+    public ResponseEntity<CreditCard> createCard(@RequestBody CreditCard creditCard) {
 
-        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        final BankClient curClient = bankClientService.getClientByUsername(auth.getName());
+        final BankClient curClient = bankClientService.getClientByUsername(Utils.getAuth().getName());
 
         creditCard.setOwnerID(curClient.getId());
         creditCard.setOwnerName(curClient.getName() + " " + curClient.getSurname());
 
         creditCardService.save(creditCard);
 
-        final int size = creditCardService.getAll().size();
-        final long id = creditCardService.getAll().get(size-1).getId();
+        final int size = creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()).size();
+        final long id = creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()).get(size-1).getId();
         return new ResponseEntity<CreditCard>(creditCardService.getByID(id), HttpStatus.OK);
     }
 

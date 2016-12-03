@@ -236,3 +236,14 @@ body {
 	height: 36px;
 	background: transparent url(../img/arraw.png) 0 -1941px;
 }
+
+.successfull-text {
+	margin-top: 15%;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.return-btn {
+	margin-top: 40px;
+	text-align: center;
+}

@@ -3,6 +3,7 @@ com/west/bank/service/CreditCardService.class
 com/west/bank/controller/LoginController.class
 com/west/bank/repository/BankClientRepository.class
 com/west/bank/service/TransactionService.class
+com/west/bank/controller/TransferBetweenMyCardsController.class
 com/west/bank/controller/MainController.class
 com/west/bank/entity/CreditCard.class
 com/west/bank/entity/Transaction.class
@@ -13,7 +14,9 @@ com/west/bank/controller/MainController$ModelFields.class
 com/west/bank/service/TransactionServiceImpl.class
 com/west/bank/config/DatabaseConfig.class
 com/west/bank/service/UserRoleServiceImpl.class
+com/west/bank/controller/TransferToSomeoneController.class
 com/west/bank/repository/TransactionRepository.class
+com/west/bank/utils/TransferUtils.class
 com/west/bank/service/BankClientServiceImpl.class
 com/west/bank/repository/UserRoleRepository.class
 com/west/bank/service/UserRoleService.class
@@ -23,5 +26,5 @@ com/west/bank/repository/CreditCardRepository.class
 com/west/bank/entity/UserRole.class
 com/west/bank/utils/Role.class
 com/west/bank/utils/CustomPageable.class
-com/west/bank/controller/TransferController.class
 com/west/bank/entity/BankClient.class
+com/west/bank/utils/Utils.class

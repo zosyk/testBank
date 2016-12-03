@@ -14,7 +14,7 @@
 
         <link href="<c:url value="../css/style.css" />" rel="stylesheet">
         <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script src="../js/transfer.js"></script>
+        <script src="../js/transferBetweenMyCards.js"></script>
     </head>
     <body>
 
@@ -38,7 +38,7 @@
 
                     <input type="hidden"   name="fromID"/>
                     <input type="hidden"   name="toID"/>
-                    <input type="button" id="btn_submit" value="Submit" onclick="createTransaction(document.getElementById('create_transaction_form'))">
+                    <input type="button" id="btn_submit" value="Submit" onclick="createTransactionBetween(document.getElementById('create_transaction_form'))">
                 </form>
 
             </div>

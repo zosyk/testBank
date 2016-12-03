@@ -3,10 +3,7 @@ package com.west.bank.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "credit_cards")
@@ -16,7 +13,9 @@ public class CreditCard {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
-    private String number;
+
+    private long number;
+
     private String pincode;
     private String type;
     private double value = 20000.5;
@@ -48,11 +47,11 @@ public class CreditCard {
         this.id = id;
     }
 
-    public String getNumber() {
+    public long getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(long number) {
         this.number = number;
     }
 

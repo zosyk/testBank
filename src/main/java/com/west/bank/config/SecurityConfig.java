@@ -40,7 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cards").access("hasRole('USER')")
                 .antMatchers("/transferMoneyBetween").access("hasRole('USER')")
                 .antMatchers("/transferMoneyToSomeone").access("hasRole('USER')")
-                .antMatchers("/createTransactionBetween").access("hasRole('USER')");
+                .antMatchers("/createTransactionBetween").access("hasRole('USER')")
+                .antMatchers("/createTransactionToSomeOne").access("hasRole('USER')")
+                .antMatchers("/confirmTransactionBetween").access("hasRole('USER')")
+                .antMatchers("/confirmTransactionToSomeone").access("hasRole('USER')")
+                .antMatchers("/success").access("hasRole('USER')");
 
         http.authorizeRequests().antMatchers("/registration").permitAll();
 

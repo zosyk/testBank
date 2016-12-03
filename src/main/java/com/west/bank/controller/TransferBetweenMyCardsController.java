@@ -3,8 +3,11 @@ package com.west.bank.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.west.bank.entity.CreditCard;
 import com.west.bank.entity.Transaction;
+import com.west.bank.service.BankClientService;
 import com.west.bank.service.CreditCardService;
 import com.west.bank.service.TransactionService;
+import com.west.bank.utils.TransferUtils;
+import com.west.bank.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Controller
-public class TransferController {
+public class TransferBetweenMyCardsController {
 
     public static final String CARDS = "cards";
 
@@ -28,13 +31,16 @@ public class TransferController {
     TransactionService transactionService;
 
 
+    @Autowired
+    BankClientService bankClientService;
+
 
     @RequestMapping(value = "/transferMoneyBetween", method = RequestMethod.GET)
     public String transferMoneyBetween(final Model model){
         final ObjectMapper mapper = new ObjectMapper();
         String json = "";
         try{
-            json = mapper.writeValueAsString(creditCardService.getAll());
+            json = mapper.writeValueAsString(creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()));
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -42,20 +48,7 @@ public class TransferController {
         return "transferBetween";
     }
 
-    @RequestMapping(value = "/transferMoneyToSomeone", method = RequestMethod.GET)
-    public String transferMoneyToSomeone(final Model model){
-        final ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try{
-            json = mapper.writeValueAsString(creditCardService.getAll());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        model.addAttribute("cards", json);
-        return "transferToSomeOne";
-    }
-
-    @RequestMapping(value = "/confirmTransaction", method = RequestMethod.POST)
+    @RequestMapping(value = "/confirmTransactionBetween", method = RequestMethod.POST)
     public String confirmTransaction(HttpServletRequest request, final Model model) {
 
         final Long fromID = Long.valueOf(request.getParameter("fromID"));
@@ -69,17 +62,17 @@ public class TransferController {
         transaction.setSum(sum);
         transaction.setTime(new Date().getTime());
         transactionService.save(transaction);
-        calculate(transaction);
+        TransferUtils.calculate(transaction, creditCardService);
 
         final ObjectMapper mapper = new ObjectMapper();
         String json = "";
         try{
-            json = mapper.writeValueAsString(creditCardService.getAll());
+            json = mapper.writeValueAsString(creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()));
         } catch (Exception e){
             e.printStackTrace();
         }
         model.addAttribute("cards", json);
-        return "transferBetween";
+        return "successPage";
     }
 
     @RequestMapping(value = "/createTransactionBetween", method = RequestMethod.POST)
@@ -98,18 +91,9 @@ public class TransferController {
         modelAndView.addObject("fromCard", fromCreditCard);
         modelAndView.addObject("toCard", toCreditCard);
         modelAndView.addObject("sum", sum);
+        modelAndView.addObject("isBetween", true);
+
 
         return modelAndView;
-    }
-
-    private void calculate(final Transaction transaction){
-        final CreditCard fromCreditCard = creditCardService.getByID(transaction.getFromID());
-        final CreditCard toCreditCard = creditCardService.getByID(transaction.getToID());
-        final  int sum = transaction.getSum();
-        fromCreditCard.setValue(fromCreditCard.getValue() - sum);
-        creditCardService.save(fromCreditCard);
-
-        toCreditCard.setValue(toCreditCard.getValue() + sum);
-        creditCardService.save(toCreditCard);
     }
 }
