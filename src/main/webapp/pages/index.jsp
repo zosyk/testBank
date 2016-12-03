@@ -11,7 +11,7 @@
 <head>
     <title>Welcome to West bank!</title>
     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/welcome.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
 </head>
@@ -25,6 +25,10 @@
         <a href="?lang=ru"><img  src="../img/ic_ru.png" width="30" height="20"></a>
     </div>
 
+    <div class="hello">
+        <h3><spring:message code="hello" /> <span class="full-name">${fullname}!</span></h3>
+    </div>
+
     <div id="cards_table" class="container">
 
     </div>
@@ -35,20 +39,22 @@
     </div>
 
     <div class="form">
-        <h1>Create card</h1>
-        <div>
-            <input type="text"  name="card_number" id="card_number" required autofocus placeholder="card number"/>
-            <input type="password" name="card_ps" id="card_ps" required placeholder="card password"/>
-            <input type="password" name="card_conf_ps" id="card_conf_ps" required placeholder="confirm card password"/>
+
+        <div id="create-new-card-container">
+            <input type="password" name="card_pin" id="card_pin" required placeholder="enter pincode" maxlength="4"/>
+            <input type="password" name="card_conf_pin" id="card_conf_pin" required placeholder="confirm pincode" maxlength="4"/>
             <select id="card_type">
                 <option>Credit Card</option>
                 <option>Withdraw Card</option>
             </select>
-            <input type="button" class="btn btn-success" value="Create New Credit Card" onclick="return createCard(document.getElementById('card_number').value,
-                                                                             document.getElementById('card_ps').value,
-                                                                             document.getElementById('card_type').value,
-                                                                             document.getElementById('cards_table'))">
         </div>
+
+        <input type="button" class="btn btn-success btn-create-new-card" value="Create New Credit Card" onclick="return createCard(
+                                                                             document.getElementById('card_pin'),
+                                                                             document.getElementById('card_conf_pin'),
+                                                                             document.getElementById('card_type').value,
+                                                                             document.getElementById('create-new-card-container'))">
+
     </div>
 
     <script type="text/javascript">

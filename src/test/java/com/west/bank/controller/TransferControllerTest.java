@@ -56,12 +56,12 @@ public class TransferControllerTest {
         final CreditCard first = new CreditCard();
         first.setId(1L);
         first.setNumber(1234567891234567L);
-        first.setPincode("1234");
+        first.setPincode(1234);
 
         final CreditCard second = new CreditCard();
         second.setId(2L);
         second.setNumber(1234567891234569L);
-        second.setPincode("4343");
+        second.setPincode(4343);
 
         when(creditCardService.getCreditCardByOffset(0,5,1)).thenReturn(Arrays.asList(first, second));
 

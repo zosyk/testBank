@@ -21,4 +21,7 @@ public interface CreditCardRepository extends JpaRepository<CreditCard, Long> {
 
     @Query("select c from CreditCard c where c.ownerID = :ownerID")
     Page<CreditCard> findAllByUserIDWithOffset(@Param("ownerID") long ownerID, Pageable Pageable);
+
+    @Query("select max(c.number) from CreditCard c")
+    long getMaxCardNumber();
 }

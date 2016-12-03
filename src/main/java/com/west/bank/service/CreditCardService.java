@@ -18,4 +18,8 @@ public interface CreditCardService {
     void delete(final long id);
 
     CreditCard findCardByNumber(final long number);
+
+    long getCardCount();
+
+    long getMaxCardNumber();
 }

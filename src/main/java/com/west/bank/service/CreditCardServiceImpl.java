@@ -41,4 +41,13 @@ public class CreditCardServiceImpl implements CreditCardService{
 
         return repository.findCardByNumber(number);
     }
+
+    public long getCardCount() {
+        return repository.count();
+    }
+
+    @Override
+    public long getMaxCardNumber() {
+        return repository.getMaxCardNumber();
+    }
 }

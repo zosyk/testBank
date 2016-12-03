@@ -5,29 +5,39 @@
 
 var page = 0;
 
-function validate(cardNumber, cardPassword, cardType) {
-    var result  = true;
+function validate(pincode, confirmPincode) {
 
-    if(cardNumber == ''){
+    var result  = true;
+    var errorMes = "";
+
+    if(pincode == '' || confirmPincode == '') {
         result = false;
-        alert("Enter your cardNumber please");
-    } else if(cardPassword == '') {
+        errorMes = "Enter your pincode";
+    } else if(pincode.length <4 || confirmPincode.length <4) {
         result = false;
-        alert("Enter your cardPassword please");
-    } else if(cardType == ''){
+        errorMes = "Length of pincode must be 4 digits";
+    } else if(pincode != confirmPincode){
         result = false;
-        alert("Enter your cardType please");
+        errorMes = "pincode isn't match"
     }
+
+    if(!result)
+        alert(errorMes);
+
     return result;
 }
 
-function createCard(number, pincode, type) {
+function createCard(pincode, confirm_pincode, type, createCardContainer) {
 
-    if (validate(number, pincode, type)) {
+    if(createCardContainer.offsetHeight == 0){
+        createCardContainer.style.display = 'block';
+        return;
+    }
+
+    if (validate(pincode.value, confirm_pincode.value)) {
 
         var card = {
-            "number": number,
-            "pincode": pincode,
+            "pincode": pincode.value,
             "type": type
         }
 
@@ -44,7 +54,10 @@ function createCard(number, pincode, type) {
             },
             success: function (data) {
                 loadUsers();
-                console.log("in success method, createCard")
+                console.log("in success method, createCard");
+                createCardContainer.style.display = 'none';
+                pincode.value = '';
+                confirm_pincode.value = '';
             },
             error: function (jqXHR, testStatus, errorThrown) {
                 console.log("in error method, error: " + errorThrown);
@@ -52,6 +65,7 @@ function createCard(number, pincode, type) {
         });
     }
 }
+
 
 function loadUsers() {
     $.ajax({

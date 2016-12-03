@@ -24,6 +24,7 @@ public class MainController {
 
     public static final int LIMIT = 3;
     private int offset = 0;
+    private final long DEFAULT_CARD_NUMBER = 5463_4321_4356_0921L;
 
 
     @Autowired
@@ -42,6 +43,10 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getWelcomePage(final Map<String , Object> model){
+
+        final BankClient bankClient = bankClientService.getClientByUsername(Utils.getAuth().getName());
+
+        model.put("fullname", bankClient.getName() + " " + bankClient.getSurname());
         return "index";
     }
 
@@ -99,6 +104,7 @@ public class MainController {
 
         final BankClient curClient = bankClientService.getClientByUsername(Utils.getAuth().getName());
 
+        creditCard.setNumber(getCardNumber());
         creditCard.setOwnerID(curClient.getId());
         creditCard.setOwnerName(curClient.getName() + " " + curClient.getSurname());
 
@@ -107,6 +113,14 @@ public class MainController {
         final int size = creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()).size();
         final long id = creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()).get(size-1).getId();
         return new ResponseEntity<CreditCard>(creditCardService.getByID(id), HttpStatus.OK);
+    }
+
+    private long getCardNumber(){
+        if(creditCardService.getCardCount() == 0)
+            return DEFAULT_CARD_NUMBER;
+
+        return creditCardService.getMaxCardNumber() + 1;
+
     }
 
 

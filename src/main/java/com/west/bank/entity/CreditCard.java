@@ -14,9 +14,11 @@ public class CreditCard {
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
 
+    @Column(length = 16)
     private long number;
 
-    private String pincode;
+    @Column(length = 4)
+    private int pincode;
     private String type;
     private double value = 20000.5;
 
@@ -55,11 +57,11 @@ public class CreditCard {
         this.number = number;
     }
 
-    public String getPincode() {
+    public int getPincode() {
         return pincode;
     }
 
-    public void setPincode(String pincode) {
+    public void setPincode(int pincode) {
         this.pincode = pincode;
     }
 

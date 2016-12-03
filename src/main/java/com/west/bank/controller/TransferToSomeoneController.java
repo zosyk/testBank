@@ -99,12 +99,5 @@ public class TransferToSomeoneController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/success", method = RequestMethod.GET)
-    public String getSuccessPage(){
-
-        return "index";
-    }
-
-
 
 }

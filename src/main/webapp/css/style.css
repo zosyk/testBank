@@ -179,7 +179,7 @@ body {
 .cards-descr-container {
 
 	margin: auto;
-	width: 400px;
+	width: 600px;
 
 }
 .cards-labels {
@@ -246,4 +246,23 @@ body {
 .return-btn {
 	margin-top: 40px;
 	text-align: center;
+}
+
+
+
+/*main screen*/
+.hello {
+	padding-left: 60px;
+}
+
+.full-name {
+	font-weight: bold;
+}
+
+.btn-create-new-card {
+	margin-top: 40px;
+}
+
+#create-new-card-container {
+	display: none;
 }
