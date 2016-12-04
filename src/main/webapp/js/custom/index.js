@@ -53,7 +53,7 @@ function createCard(pincode, confirm_pincode, type, createCardContainer) {
                 console.log("in complete method, createCard");
             },
             success: function (data) {
-                loadUsers();
+                loadCards();
                 console.log("in success method, createCard");
                 createCardContainer.style.display = 'none';
                 pincode.value = '';
@@ -67,7 +67,7 @@ function createCard(pincode, confirm_pincode, type, createCardContainer) {
 }
 
 
-function loadUsers() {
+function loadCards() {
     $.ajax({
         url: "/getAllCards?page="+ page,
         method : 'get',
@@ -83,7 +83,7 @@ function callBackLoad(data) {
     console.log("success : getAll");
 
     // var usersBlock = document.getElementById("users");
-    var table = "<table class=' table table-striped'>";
+    var table = "<table class=' table '>";
 
     console.log("offset: " + data.offset + " , limit: " + data.limit + " , size: " + data.size);
     var size = data.creditCards.length;
@@ -92,9 +92,9 @@ function callBackLoad(data) {
     }
     for (var i=0;i!=size;++i) {
         if(i == 0){
-            table += "<tr><th>Card Type</th><th>Card Number</th><th>Card Value</th></tr>"
+            table += "<tr><th>Card Type</th><th>Card Number</th><th>Card Value</th><th>Transaction History</th></tr>"
         }
-        table += "<tr><td>"+data.creditCards[i].type+"</td><td>"+data.creditCards[i].number+"</td><td>"+data.creditCards[i].value+" \$</td><td>" + "<a href=" + "/getHistory?id=" +  data.creditCards[i].id +  " >Watch History</a>" + "</td></tr>"
+        table += "<tr><td>"+data.creditCards[i].type+"</td><td>"+data.creditCards[i].number+"</td><td>"+data.creditCards[i].value+" \$</td><td>" + "<a href=" + "/getHistory?number=" +  data.creditCards[i].number +  " >Watch History</a>" + "</td></tr>"
     }
     table += "</table>"
     drawPagination(data.offset, data.limit, data.size);
@@ -126,7 +126,7 @@ function drawPagination(offset, limit, size) {
 function paginate(pag) {
     // alert('pag: ' + pag);
     page = pag-1;
-    loadUsers();
+    loadCards();
 }
 
 

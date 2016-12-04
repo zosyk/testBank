@@ -37,7 +37,7 @@ public class CreditCardServiceImpl implements CreditCardService{
         repository.delete(id);
     }
 
-    public CreditCard findCardByNumber(long number) {
+    public CreditCard getByNumber(long number) {
 
         return repository.findCardByNumber(number);
     }

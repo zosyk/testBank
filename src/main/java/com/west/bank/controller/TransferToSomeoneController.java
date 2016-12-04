@@ -2,7 +2,6 @@ package com.west.bank.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.west.bank.entity.CreditCard;
-import com.west.bank.entity.Transaction;
 import com.west.bank.service.BankClientService;
 import com.west.bank.service.CreditCardService;
 import com.west.bank.service.TransactionService;
@@ -13,10 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 @Controller
 public class TransferToSomeoneController {
@@ -53,43 +53,22 @@ public class TransferToSomeoneController {
     @RequestMapping(value = "/confirmTransactionToSomeone", method = RequestMethod.POST)
     public String confirmTransaction(HttpServletRequest request, final Model model) {
 
-        final Long fromID = Long.valueOf(request.getParameter("fromID"));
-        final Long toID = Long.valueOf(request.getParameter("toID"));
-        final Integer sum = Integer.valueOf(request.getParameter("sum"));
-
-        final Transaction transaction = new Transaction();
-
-        transaction.setFromID(fromID);
-        transaction.setToID(toID);
-        transaction.setSum(sum);
-        transaction.setTime(new Date().getTime());
-        transactionService.save(transaction);
-        TransferUtils.calculate(transaction, creditCardService);
-
-        final ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try{
-            json = mapper.writeValueAsString(creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        model.addAttribute("cards", json);
-        return "successPage";
+        return TransferUtils.confirmTransaction(request, model, transactionService, creditCardService, bankClientService);
     }
 
 
     @RequestMapping(value = "/createTransactionToSomeOne", method = RequestMethod.POST)
     public ModelAndView createTransactionToSomeOne(HttpServletRequest request){
 
-        final Long fromID = Long.valueOf(request.getParameter("fromID"));
+        final Long fromCardNumber = Long.valueOf(request.getParameter("fromCardNumber"));
         final Long toCardNumber = Long.valueOf(request.getParameter("toCardNumber"));
 
         final Integer sum = Integer.valueOf(request.getParameter("sum"));
 
         final ModelAndView modelAndView = new ModelAndView("transactionView");
 
-        final CreditCard fromCreditCard = creditCardService.getByID(fromID);
-        final CreditCard toCreditCard = creditCardService.findCardByNumber(toCardNumber);
+        final CreditCard fromCreditCard = creditCardService.getByNumber(fromCardNumber);
+        final CreditCard toCreditCard = creditCardService.getByNumber(toCardNumber);
 
         modelAndView.addObject("fromCard", fromCreditCard);
         modelAndView.addObject("toCard", toCreditCard);
@@ -97,6 +76,24 @@ public class TransferToSomeoneController {
         modelAndView.addObject("isBetween", false);
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/checkCard", method = RequestMethod.POST)
+    @ResponseBody
+    public String checkCard(@RequestParam(value="number") long number){
+
+        if(!isCardValidate(number)){
+            return "{\"error\": \"This card wasn't found\"}";
+        }
+
+        return "{\"message\": \"the card is found\"}";
+    }
+
+    private boolean isCardValidate(final long number){
+
+        final CreditCard creditCard = creditCardService.getByNumber(number);
+
+        return creditCard != null;
     }
 
 

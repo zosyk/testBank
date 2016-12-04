@@ -15,8 +15,8 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
-	<script type="text/javascript" src="../js/index.js"></script>
-	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/custom/index.js"></script>
+	<script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
 
 	<!-- Custom styles for this template -->
 	<link href="<c:url value="../css/style.css" />" rel="stylesheet">
@@ -82,11 +82,11 @@
 					</c:if>
 
 					<h2 class="form-signin-heading">Please sign in</h2>
-					<input  type="text" class="form-control form-item-margin-top" name="j_username" placeholder="login" required autofocus value="">
-					<input type="password" class="form-control form-item-margin-top" name="j_password" placeholder="password" required value="">
+					<input  type="text" class="form-control form-item-margin-top" name="j_username" placeholder="enter your email" required autofocus value="">
+					<input type="password" class="form-control form-item-margin-top" name="j_password" placeholder="enter your password" required value="">
 					<button class="btn  btn-lg btn-primary btn-block form-item-margin-top" type="submit">Sign In</button>
 				</form>
-				<form action="${pageContext.request.contextPath}/registration" method="get">
+				<form action="${pageContext.request.contextPath}/registration/" method="get">
 					<button class="btn btn-lg btn-primary btn-block form-item-margin-top" type="submit" id="btn_reg">Registration</button>
 				</form>
 

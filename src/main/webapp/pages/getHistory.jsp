@@ -12,12 +12,12 @@
     <title>History</title>
     <link href="<c:url value="../css/style.css" />" rel="stylesheet">
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/transferBetweenMyCards.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
+    <script src="../js/custom/getHistory.js"></script>
 </head>
     <body id="body">
 
-        <div id="transactions" class="container">
+        <div id="transactions" class="container history-transactions-empty-text">
         </div>
 
     <script>

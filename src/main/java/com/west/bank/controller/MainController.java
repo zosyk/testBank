@@ -72,17 +72,17 @@ public class MainController {
         return creditCardService.getCreditCardByOffset(offset, limit, bankClientService.getClientByUsername(Utils.getAuth().getName()).getId());
     }
 
-    @RequestMapping(value = "/getHistory", params = {"id"}, method = RequestMethod.GET)
-    private ModelAndView getClient(@RequestParam(value = "id", required = true, defaultValue = "") String id){
+    @RequestMapping(value = "/getHistory", params = {"number"}, method = RequestMethod.GET)
+    private ModelAndView getClient(@RequestParam(value = "number", required = true, defaultValue = "") String number){
 
         final ModelAndView model = new ModelAndView("getHistory");
         final ObjectMapper mapper = new ObjectMapper();
         String json = "";
-        final List<Transaction> transactions = transactionService.findByCardID(Long.valueOf(id));
+        final List<Transaction> transactions = transactionService.findByNumber(Long.valueOf(number));
         final Set<CreditCard> cards = new HashSet<CreditCard>();
         for(Transaction transaction: transactions){
-            cards.add(creditCardService.getByID(transaction.getFromID()));
-            cards.add(creditCardService.getByID(transaction.getToID()));
+            cards.add(creditCardService.getByNumber(transaction.getFromNumber()));
+            cards.add(creditCardService.getByNumber(transaction.getToNumber()));
         }
         final HashMap<Object, Object> map = new HashMap<Object, Object>();
         map.put(ModelFields.TRANSACTIONS, transactions);

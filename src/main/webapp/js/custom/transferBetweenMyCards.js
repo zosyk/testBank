@@ -90,21 +90,35 @@ function selectorToCardsListener(selector) {
     }
 }
 
-
-function createTransactionToSomeOne(transactionForm) {
+function createTransactionBetween(transactionForm) {
 
     var fromInput = transactionForm.elements["fromID"];
+    var toInput = transactionForm.elements["toID"];
 
-    var card = {
-        "fromID": cards[fromCard].id
-    }
+  if(validateTransactionBetween()){
+      var card = {
+          "fromID": cards[fromCard].id,
+          "toID": cards[toCard].id
+      }
 
-    fromInput.value = card.fromID;
+      fromInput.value = card.fromID;
+      toInput.value = card.toID;
 
-    transactionForm.submit();
+      transactionForm.submit();
+
+
+  } else {
+      alert("Please choose credit card, which you want to fill")
+  }
+
 }
 
-
+function validateTransactionBetween() {
+    var result = true;
+    if(fromCard == toCard)
+        result = false;
+    return result;
+}
 
 function initSelectors(data) {
     var model = '${cards}';
@@ -124,31 +138,7 @@ function removeOptions(selectbox)
     }
 }
 
-function tableTransactions(json) {
-    json = JSON.parse(json);
-    var transactions = json.transactions;
-    var cards = json.cards;
-    var table = "<table class='table'>";
 
-    var size = transactions.length;
-    if(size == 0){
-        table += "<p>There is no any transactions</p>"
-    }
-    for (var i=0;i!=size;++i) {
-        if(i == 0){
-            table += "<tr><th>From Card</th><th>To Card</th><th>Sum</th><th>Date</th></tr>"
-        }
-        var transaction = transactions[i];
-        var date = new Date(transaction.time);
-        var dateToString = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
-        var fromCard = findCardByID(cards, transaction.fromID);
-        var toCard = findCardByID(cards, transaction.toID);
-        table += "<tr><td>"+fromCard.cardNumber + " " +fromCard.cardType+"</td><td>"+toCard.cardNumber + " " +toCard.cardType+"</td><td>"+transaction.sum + " $"+"</td><td>" + dateToString + "</td></tr>"
-    }
-    table += "</table>"
-
-    $('#transactions').html(table);
-}
 
 
 function findCardByID(cards, id) {

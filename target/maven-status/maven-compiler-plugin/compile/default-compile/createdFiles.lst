@@ -8,6 +8,7 @@ com/west/bank/controller/MainController.class
 com/west/bank/entity/CreditCard.class
 com/west/bank/entity/Transaction.class
 com/west/bank/service/CreditCardServiceImpl.class
+com/west/bank/controller/RegistrationController.class
 com/west/bank/config/WebConfig.class
 com/west/bank/config/SecurityConfig.class
 com/west/bank/controller/MainController$ModelFields.class

@@ -17,20 +17,13 @@ public class Transaction {
     @GenericGenerator(name= "increment", strategy= "increment")
     private long id;
 
-    private long fromID;
-    private long toID;
+    private long fromNumber;
+    private String fromName;
+
+    private long toNumber;
+    private String toName;
     private int sum;
     private long time;
-
-    private String whomSend;
-
-    public String getWhomSend() {
-        return whomSend;
-    }
-
-    public void setWhomSend(String whomSend) {
-        this.whomSend = whomSend;
-    }
 
     public long getId() {
         return id;
@@ -40,20 +33,36 @@ public class Transaction {
         this.id = id;
     }
 
-    public long getFromID() {
-        return fromID;
+    public long getFromNumber() {
+        return fromNumber;
     }
 
-    public void setFromID(long fromID) {
-        this.fromID = fromID;
+    public void setFromNumber(long fromNumber) {
+        this.fromNumber = fromNumber;
     }
 
-    public long getToID() {
-        return toID;
+    public String getFromName() {
+        return fromName;
     }
 
-    public void setToID(long toID) {
-        this.toID = toID;
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    public long getToNumber() {
+        return toNumber;
+    }
+
+    public void setToNumber(long toNumber) {
+        this.toNumber = toNumber;
+    }
+
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName;
     }
 
     public int getSum() {

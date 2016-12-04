@@ -2,6 +2,8 @@
  * Created by alex on 11/26/16.
  */
 
+var errorMessage = "Internal error";
+
 
 function registration(name, surname, email, password, confirmPassword){
 
@@ -48,6 +50,53 @@ function registration(name, surname, email, password, confirmPassword){
         alert(errorString);
     }
 
-
-    return result;
+    if(result == true){
+        checkEmail(email.val().trim());
+    }
 }
+
+function checkEmail(email) {
+
+    var emailObj = {
+        "email": email
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/registration/checkEmail",
+        contentType: "application/x-www-form-urlencoded",
+        data: emailObj,
+        dataType: "json",
+        success: function (data) {
+            onSuccess(data)},
+        error: function (jqXHR, testStatus, errorThrown) {
+            alert(errorMessage);
+        }
+    })
+}
+
+function onSuccess(data) {
+    var email = $("#email");
+    var errorEmail = $("#error-email");
+    var emailValue = email.val();
+
+    if(data.hasOwnProperty("error")){
+        errorEmail.text(data.error);
+        email.addClass("error-input");
+        email.keypress(function (event) {
+            clearInput(email, errorEmail, emailValue);
+        });
+
+        return;
+    }
+
+
+    $('#registerUser').submit();
+
+}
+
+function clearInput(email, errorEmail, emailValue) {
+    email.removeClass("error-input");
+    errorEmail.text("");
+}
+

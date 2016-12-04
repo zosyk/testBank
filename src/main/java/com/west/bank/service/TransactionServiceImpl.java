@@ -1,9 +1,7 @@
 package com.west.bank.service;
 
 
-import com.west.bank.entity.CreditCard;
 import com.west.bank.entity.Transaction;
-import com.west.bank.repository.CreditCardRepository;
 import com.west.bank.repository.TransactionRepository;
 import com.west.bank.utils.CustomPageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,7 @@ public class TransactionServiceImpl implements TransactionService{
         repository.delete(id);
     }
 
-    public List<Transaction> findByCardID(long cardID) {
-        return repository.findByCardId(cardID);
+    public List<Transaction> findByNumber(long cardNumber) {
+        return repository.findByNumber(cardNumber);
     }
 }

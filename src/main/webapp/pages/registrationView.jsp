@@ -14,8 +14,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
-    <script type="text/javascript" src="../js/registration.js"></script>
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/custom/registration.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
 
     <link href="<c:url value="../css/registration.css" />" rel="stylesheet">
 
@@ -29,14 +29,15 @@
 <body class="main">
 
     <div class="container" >
-        <form action="/registerUser" method="post">
+        <form action="/registration/registerUser" method="post" id="registerUser">
             <h2 class="form-signin-heading">Registration</h2>
             <input type="text" class="form-control form-item-margin-top" name="name" id="name" placeholder="your name"  autofocus value="">
             <input type="text" class="form-control form-item-margin-top" name="surname" id="surname" placeholder="your surname"   autofocus value="">
+            <p id="error-email"></p>
             <input type="text" class="form-control form-item-margin-top" name="email" id="email" placeholder="enter your email"   value="">
             <input type="password" class="form-control form-item-margin-top" name="password" id="password" placeholder="enter your password"  value="">
             <input type="password" class="form-control form-item-margin-top" name="password_confirm" id="password_confirm" placeholder="confirm your password"  value="">
-            <button class="btn btn-lg btn-primary btn-block form-item-margin-top" onclick="return registration($('#name'), $('#surname'), $('#email'), $('#password'), $('#password_confirm'))" type="submit">Register</button>
+            <button class="btn btn-lg btn-primary btn-block form-item-margin-top" onclick="registration($('#name'), $('#surname'), $('#email'), $('#password'), $('#password_confirm'))" type="button">Register</button>
         </form>
 
     </div>

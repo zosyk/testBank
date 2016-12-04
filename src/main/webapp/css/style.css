@@ -257,6 +257,7 @@ body {
 
 .full-name {
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .btn-create-new-card {
@@ -266,3 +267,15 @@ body {
 #create-new-card-container {
 	display: none;
 }
+
+.cards-table {
+}
+
+.history-transactions-empty-text {
+	text-align:  center;
+}
+
+.all-cards-empty-text {
+	text-align:  center;
+}
+

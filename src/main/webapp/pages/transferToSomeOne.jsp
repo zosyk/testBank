@@ -13,8 +13,9 @@
         <title>Transfer Money</title>
 
         <link href="<c:url value="../css/style.css" />" rel="stylesheet">
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script src="../js/transferToSomeone.js"></script>
+        <link href="<c:url value="../css/transfer_to_someone.css" />" rel="stylesheet">
+        <script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
+        <script src="../js/custom/transferToSomeone.js"></script>
     </head>
     <body id="body">
 
@@ -26,17 +27,19 @@
 
                 <c:set var="createTransaction" value="/createTransactionToSomeOne"/>
                 <form action="${createTransaction}" method="post" id="create_transaction_form">
-                    <label for="from_card">From card:</label>
-                    <select id="from_card">
+
+                    <label for="fromCardNumberSelector">From card:</label>
+                    <select id="fromCardNumberSelector">
                     </select><br>
 
+                    <p id="error-card-number"></p>
                     <label for="toCardNumber">Whom:</label>
 
-                    <input type="text"  name="toCardNumber" id="toCardNumber" required  placeholder="number card"/><br>
+                    <input type="number"  name="toCardNumber" id="toCardNumber" required  placeholder="number card" max="4"/><br>
 
-                    <input type="text"  name="sum"  required  placeholder="sum"/> $<br>
+                    <input type="number"  name="sum" id="sum"  required  placeholder="sum" /> $<br>
 
-                    <input type="hidden"   name="fromID"/>
+                    <input type="hidden"   name="fromCardNumber" id="fromCardNumber"/>
                     <input type="button" id="btn_submit" value="Submit" onclick="createTransactionToSomeOne(document.getElementById('create_transaction_form'))">
                 </form>
 
@@ -45,7 +48,7 @@
 
         <script>
             var model = '${cards}';
-            createSelectFromCards(document.getElementById('from_card'), model);
+            createSelectFromCards(document.getElementById('fromCardNumberSelector'), model);
 
         </script>
     </body>

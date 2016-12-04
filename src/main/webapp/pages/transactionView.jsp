@@ -62,8 +62,8 @@
             <form action="${confirmTransaction}" method="post">
 
                 <input type="hidden"  name="sum" value="${sum}"/>
-                <input type="hidden"   name="fromID" value="${fromCard.id}"/>
-                <input type="hidden"   name="toID" value="${toCard.id}"/>
+                <input type="hidden"   name="fromNumber" value="${fromCard.number}"/>
+                <input type="hidden"   name="toNumber" value="${toCard.number}"/>
 
                 <button type="submit" class="btn btn-lg btn-success">Submit</button>
 

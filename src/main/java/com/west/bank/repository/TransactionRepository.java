@@ -10,6 +10,6 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
 
-    @Query("select t from Transaction t where t.fromID = :fromID or t.toID = :fromID")
-    List<Transaction> findByCardId(@Param("fromID") long fromID);
+    @Query("select t from Transaction t where t.fromNumber = :fromNumber or t.toNumber = :fromNumber")
+    List<Transaction> findByNumber(@Param("fromNumber") long fromNumber);
 }

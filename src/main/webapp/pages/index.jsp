@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>Welcome to West bank!</title>
-    <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/custom/index.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
 </head>
@@ -29,7 +29,7 @@
         <h3><spring:message code="hello" /> <span class="full-name">${fullname}!</span></h3>
     </div>
 
-    <div id="cards_table" class="container">
+    <div id="cards_table" class="container cards-table all-cards-empty-text">
 
     </div>
 
@@ -58,7 +58,7 @@
     </div>
 
     <script type="text/javascript">
-        loadUsers(document.getElementById("cards_table"));
+        loadCards(document.getElementById("cards_table"));
     </script>
 
 </body>

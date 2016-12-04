@@ -13,8 +13,8 @@
         <title>Transfer Money</title>
 
         <link href="<c:url value="../css/style.css" />" rel="stylesheet">
-        <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-        <script src="../js/transferBetweenMyCards.js"></script>
+        <script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
+        <script src="../js/custom/transferBetweenMyCards.js"></script>
     </head>
     <body>
 

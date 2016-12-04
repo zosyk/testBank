@@ -2,7 +2,6 @@ package com.west.bank.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.west.bank.entity.CreditCard;
-import com.west.bank.entity.Transaction;
 import com.west.bank.service.BankClientService;
 import com.west.bank.service.CreditCardService;
 import com.west.bank.service.TransactionService;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 @Controller
 public class TransferBetweenMyCardsController {
@@ -51,28 +49,7 @@ public class TransferBetweenMyCardsController {
     @RequestMapping(value = "/confirmTransactionBetween", method = RequestMethod.POST)
     public String confirmTransaction(HttpServletRequest request, final Model model) {
 
-        final Long fromID = Long.valueOf(request.getParameter("fromID"));
-        final Long toID = Long.valueOf(request.getParameter("toID"));
-        final Integer sum = Integer.valueOf(request.getParameter("sum"));
-
-        final Transaction transaction = new Transaction();
-
-        transaction.setFromID(fromID);
-        transaction.setToID(toID);
-        transaction.setSum(sum);
-        transaction.setTime(new Date().getTime());
-        transactionService.save(transaction);
-        TransferUtils.calculate(transaction, creditCardService);
-
-        final ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try{
-            json = mapper.writeValueAsString(creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        model.addAttribute("cards", json);
-        return "successPage";
+        return TransferUtils.confirmTransaction(request, model, transactionService, creditCardService, bankClientService);
     }
 
     @RequestMapping(value = "/createTransactionBetween", method = RequestMethod.POST)
