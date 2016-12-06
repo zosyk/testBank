@@ -45,9 +45,15 @@ public class MainController {
     public String getWelcomePage(final Map<String , Object> model){
 
         final BankClient bankClient = bankClientService.getClientByUsername(Utils.getAuth().getName());
-
         model.put("fullname", bankClient.getName() + " " + bankClient.getSurname());
+
         return "index";
+    }
+
+    @RequestMapping(value = "/customTest", method = RequestMethod.GET)
+    public ModelAndView customInput(){
+
+        return new ModelAndView("customInput");
     }
 
 
@@ -64,6 +70,7 @@ public class MainController {
         model.addAttribute(ModelFields.CREDIT_CARDS, creditCards);
         model.addAttribute(ModelFields.LIMIT, limit);
         model.addAttribute(ModelFields.SIZE, size);
+
         return new ResponseEntity<Model>(model, HttpStatus.OK);
     }
 
@@ -77,30 +84,35 @@ public class MainController {
 
         final ModelAndView model = new ModelAndView("getHistory");
         final ObjectMapper mapper = new ObjectMapper();
+
         String json = "";
+
         final List<Transaction> transactions = transactionService.findByNumber(Long.valueOf(number));
         final Set<CreditCard> cards = new HashSet<CreditCard>();
+
         for(Transaction transaction: transactions){
             cards.add(creditCardService.getByNumber(transaction.getFromNumber()));
             cards.add(creditCardService.getByNumber(transaction.getToNumber()));
         }
+
         final HashMap<Object, Object> map = new HashMap<Object, Object>();
         map.put(ModelFields.TRANSACTIONS, transactions);
         map.put(ModelFields.CREDIT_CARDS, cards);
+
         try{
             json = mapper.writeValueAsString(map);
         } catch (Exception e){
             e.printStackTrace();
         }
+
         model.addObject(ModelFields.TRANSACTIONS, json);
+
         return model;
     }
-
 
     @RequestMapping(value = "/createCard", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<CreditCard> createCard(@RequestBody CreditCard creditCard) {
-
 
         final BankClient curClient = bankClientService.getClientByUsername(Utils.getAuth().getName());
 
@@ -112,6 +124,7 @@ public class MainController {
 
         final int size = creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()).size();
         final long id = creditCardService.findAllByUserID(bankClientService.getClientByUsername(Utils.getAuth().getName()).getId()).get(size-1).getId();
+
         return new ResponseEntity<CreditCard>(creditCardService.getByID(id), HttpStatus.OK);
     }
 
@@ -123,7 +136,6 @@ public class MainController {
 
     }
 
-
     public interface ModelFields {
          String TRANSACTIONS = "transactions";
 
@@ -131,7 +143,6 @@ public class MainController {
          String SIZE = "size";
          String OFFSET = "offset";
          String CREDIT_CARDS = "creditCards";
-
 
     }
 
