@@ -9,9 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="../css/custom_input.css" rel="stylesheet">
     <title>Title</title>
 
+    <link href="../css/custom_input.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="../js/customInput.js" type="text/javascript"></script>
 </head>

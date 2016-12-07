@@ -15,14 +15,12 @@
     <!-- Bootstrap core CSS -->
     <link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
     <script type="text/javascript" src="../js/custom/registration.js"></script>
-    <script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
 
     <link href="<c:url value="../css/registration.css" />" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <link href="../css/custom_input.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="../js/customInput.js" type="text/javascript"></script>
     <![endif]-->
 </head>
 
@@ -31,12 +29,54 @@
     <div class="container" >
         <form action="/registration/registerUser" method="post" id="registerUser">
             <h2 class="form-signin-heading">Registration</h2>
-            <input type="text" class="form-control form-item-margin-top" name="name" id="name" placeholder="your name"  autofocus value="">
-            <input type="text" class="form-control form-item-margin-top" name="surname" id="surname" placeholder="your surname"   autofocus value="">
+
+            <div class="field">
+
+                <label for="name" class="field-label">Your name</label>
+
+                <input type="text" class="field-input" name="name" id="name" autofocus value="">
+
+            </div>
+
+            <div class="field">
+
+                <label for="surname" class="field-label">Your surname</label>
+
+                <input type="text" class="field-input" name="surname" id="surname"  autofocus value="">
+
+
+            </div>
+
+
+
             <p id="error-email"></p>
-            <input type="text" class="form-control form-item-margin-top" name="email" id="email" placeholder="enter your email"   value="">
-            <input type="password" class="form-control form-item-margin-top" name="password" id="password" placeholder="enter your password"  value="">
-            <input type="password" class="form-control form-item-margin-top" name="password_confirm" id="password_confirm" placeholder="confirm your password"  value="">
+
+            <div class="field">
+
+                <label for="email" class="field-label">Your email</label>
+
+                <input type="text" class="field-input" name="email" id="email"   value="">
+
+            </div>
+
+            <div class="field">
+
+                <label for="password" class="field-label">Your password</label>
+
+                <input type="password" class="field-input" name="password" id="password"   value="">
+
+
+            </div>
+
+            <div class="field">
+
+                <label for="password_confirm" class="field-label">Confirm your password</label>
+
+                <input type="password" class="field-input" name="password_confirm" id="password_confirm"  value="">
+
+
+            </div>
+
             <button class="btn btn-lg btn-primary btn-block form-item-margin-top" onclick="registration($('#name'), $('#surname'), $('#email'), $('#password'), $('#password_confirm'))" type="button">Register</button>
         </form>
 

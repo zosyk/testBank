@@ -16,7 +16,9 @@
 	<!-- Bootstrap core CSS -->
 	<link href="<c:url value="../css/bootstrap.css" />" rel="stylesheet">
 	<script type="text/javascript" src="../js/custom/index.js"></script>
-	<script type="text/javascript" src="../js/jquery/jquery-3.1.1.min.js"></script>
+	<link href="../css/custom_input.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="../js/customInput.js" type="text/javascript"></script>
 
 	<!-- Custom styles for this template -->
 	<link href="<c:url value="../css/style.css" />" rel="stylesheet">
@@ -82,8 +84,24 @@
 					</c:if>
 
 					<h2 class="form-signin-heading">Please sign in</h2>
-					<input  type="text" class="form-control form-item-margin-top" name="j_username" placeholder="enter your email" required autofocus value="">
-					<input type="password" class="form-control form-item-margin-top" name="j_password" placeholder="enter your password" required value="">
+
+					<div class="field">
+
+						<label for="j_username" class="field-label">Email</label>
+
+						<input  type="text" class="field-input" id="j_username" name="j_username" required autofocus value="">
+
+					</div>
+
+					<div class="field">
+
+						<label for="j_password" class="field-label">Password</label>
+
+						<input type="password" class="field-input" id="j_password" name="j_password" required value="">
+
+
+					</div>
+
 					<button class="btn  btn-lg btn-primary btn-block form-item-margin-top" type="submit">Sign In</button>
 				</form>
 				<form action="${pageContext.request.contextPath}/registration/" method="get">
